@@ -56,6 +56,8 @@ public class ScoreTable implements Input.TextInputListener {
         // Parse scores
         parseScore();
 
+        _layout = new GlyphLayout();
+
         // Load resources
         _fontTitle = Freegemas.getPlatformResolver().loadFont("data/menuFont.fnt", "data/menu.ttf", 60);
         _fontText = Freegemas.getPlatformResolver().loadFont("data/normalFont.fnt", "data/normal.ttf", 60);
@@ -68,8 +70,6 @@ public class ScoreTable implements Input.TextInputListener {
         _titlePos = new Vector2(548 + (Freegemas.VIRTUAL_WIDTH - 548 - 80 - _layout.width) / 2, 144);
         _firstScorePos = new Vector2(695, 260);
         _scoreYGap = 60;
-
-        _layout = new GlyphLayout();
 
         // Launch text input if score is better than any of the already recorded or if there are less than 5
         int numScores = _scores.size;

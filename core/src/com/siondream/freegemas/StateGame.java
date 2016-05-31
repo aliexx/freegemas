@@ -80,6 +80,7 @@ public class StateGame extends State {
     // Fonts
     private BitmapFont _fontTime;
     private BitmapFont _fontScore;
+    private BitmapFont _fontTotalScore;
     private BitmapFont _fontText;
     private BitmapFont _fontLoading;
     public static final String FONT_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;,{}\"�`'<>";
@@ -173,6 +174,7 @@ public class StateGame extends State {
 
         _fontTime = Freegemas.getPlatformResolver().loadFont("data/timeFont.fnt", "data/lcd.ttf", 100);
         _fontScore = Freegemas.getPlatformResolver().loadFont("data/scoreFont.fnt", "data/lcd.ttf", 70);
+        _fontTotalScore = Freegemas.getPlatformResolver().loadFont("data/scoreFont.fnt", "data/lcd.ttf", 70);
         _fontText = Freegemas.getPlatformResolver().loadFont("data/normalFont.fnt", "data/normal.ttf", 45);
 
         // Load textures
@@ -221,6 +223,7 @@ public class StateGame extends State {
         _imgTimeBackground = null;
         _fontTime = null;
         _fontScore = null;
+        _fontTotalScore = null;
         _fontText = null;
         _match1SFX = null;
         _match2SFX = null;
@@ -626,8 +629,8 @@ public class StateGame extends State {
         batch.draw(_imgScoreBackground, 70, 75);
         _fontText.draw(batch, _lang.getString("Points"), 78, 40);
 
-        _layout.setText(_fontScore, "" + _points);
-        _fontScore.draw(batch,
+        _layout.setText(_fontTotalScore, "" + _points);
+        _fontTotalScore.draw(batch,
                 "" + _points,
                 452 - _layout.width,
                 93);
