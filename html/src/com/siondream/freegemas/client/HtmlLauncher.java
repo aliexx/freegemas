@@ -7,13 +7,18 @@ import com.siondream.freegemas.Freegemas;
 
 public class HtmlLauncher extends GwtApplication {
 
-        @Override
-        public GwtApplicationConfiguration getConfig () {
-                return new GwtApplicationConfiguration(480, 320);
-        }
+    public HtmlLauncher() {
+        super();
+        Freegemas.setPlatformResolver(new WebGLResolver());
+    }
 
-        @Override
-        public ApplicationListener createApplicationListener () {
-                return new Freegemas();
-        }
+    @Override
+    public GwtApplicationConfiguration getConfig () {
+        return new GwtApplicationConfiguration(960, 540);
+    }
+
+    @Override
+    public ApplicationListener createApplicationListener () {
+        return new Freegemas();
+    }
 }
