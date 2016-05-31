@@ -41,6 +41,7 @@ public class ScoreTable implements Input.TextInputListener {
     private Vector2 _firstScorePos;
     private int _scoreYGap;
 
+    GlyphLayout _layout;
 
     public ScoreTable(Freegemas game, int points) {
         // Initial state and game
@@ -63,11 +64,12 @@ public class ScoreTable implements Input.TextInputListener {
         _titleText = _lang.getString("Best scores");
 
         // Positions
-        GlyphLayout layout = new GlyphLayout();
-        layout.setText(_fontTitle, _titleText);
-        _titlePos = new Vector2(548 + (Freegemas.VIRTUAL_WIDTH - 548 - 80 - layout.width) / 2, 144);
+        _layout.setText(_fontTitle, _titleText);
+        _titlePos = new Vector2(548 + (Freegemas.VIRTUAL_WIDTH - 548 - 80 - _layout.width) / 2, 144);
         _firstScorePos = new Vector2(695, 260);
         _scoreYGap = 60;
+
+        _layout = new GlyphLayout();
 
         // Launch text input if score is better than any of the already recorded or if there are less than 5
         int numScores = _scores.size;

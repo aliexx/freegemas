@@ -41,6 +41,8 @@ public class StateHowto extends State {
 
     private boolean _readyToChange;
 
+    GlyphLayout _layout;
+
     public StateHowto (Freegemas freegemas) {
         super(freegemas);
 
@@ -64,9 +66,9 @@ public class StateHowto extends State {
         _helpText = _lang.getString("help_text");
 
         // Set loading position
-        GlyphLayout layout = new GlyphLayout();
-        layout.setText(_fontLoading, _loadingText);
-        _loadingPos = new Vector2((Freegemas.VIRTUAL_WIDTH - layout.width) / 2, (Freegemas.VIRTUAL_HEIGHT - layout.height) / 2);
+        _layout = new GlyphLayout();
+        _layout.setText(_fontLoading, _loadingText);
+        _loadingPos = new Vector2((Freegemas.VIRTUAL_WIDTH - _layout.width) / 2, (Freegemas.VIRTUAL_HEIGHT - _layout.height) / 2);
 
         _readyToChange = false;
     }
@@ -109,9 +111,8 @@ public class StateHowto extends State {
         _imgBackground.flip(false, true);
 
         // Set positions now that we now about sizes
-        GlyphLayout layout = new GlyphLayout();
-        layout.setText(_fontTitle, _titleText);
-        _titlePos = new Vector2(315 + (Freegemas.VIRTUAL_WIDTH - 400 - layout.width) / 2, 55);
+        _layout.setText(_fontTitle, _titleText);
+        _titlePos = new Vector2(315 + (Freegemas.VIRTUAL_WIDTH - 400 - _layout.width) / 2, 55);
         _helpPos = new Vector2(375, 175);
 
         Gdx.input.setInputProcessor(this);

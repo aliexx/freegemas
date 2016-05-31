@@ -116,6 +116,8 @@ public class StateGame extends State {
     private Color _imgColor = Color.WHITE.cpy();
     private Coord _coord = new Coord();
 
+    private GlyphLayout _layout;
+
     public StateGame(Freegemas freegemas) {
         super(freegemas);
 
@@ -156,6 +158,8 @@ public class StateGame extends State {
         _effectPool = new ParticleEffectPool(_effect, 20, 100);
 
         _effects = new Array<ParticleEffectPool.PooledEffect>();
+
+        _layout = new GlyphLayout();
 
         // Init game for the first time
         init();
@@ -600,12 +604,11 @@ public class StateGame extends State {
         // STATE LOADING
         if (_state == State.Loading) {
             String loading = _lang.getString("Loading...");
-            GlyphLayout layout = new GlyphLayout();
-            layout.setText(_fontLoading, loading);
+            _layout.setText(_fontLoading, loading);
             _fontLoading.draw(batch,
                     loading,
-                    (Freegemas.VIRTUAL_WIDTH - layout.width) / 2,
-                    (Freegemas.VIRTUAL_HEIGHT - layout.height) / 2);
+                    (Freegemas.VIRTUAL_WIDTH - _layout.width) / 2,
+                    (Freegemas.VIRTUAL_HEIGHT - _layout.height) / 2);
 
             return;
         }
@@ -620,25 +623,23 @@ public class StateGame extends State {
         _exitButton.render();
 
         // Draw the score
-        GlyphLayout layout = new GlyphLayout();
-
         batch.draw(_imgScoreBackground, 70, 75);
         _fontText.draw(batch, _lang.getString("Points"), 78, 40);
 
-        layout.setText(_fontScore, "" + _points);
+        _layout.setText(_fontScore, "" + _points);
         _fontScore.draw(batch,
                 "" + _points,
-                452 - layout.width,
+                452 - _layout.width,
                 93);
 
         // Draw the time
         batch.draw(_imgTimeBackground, 70, 215);
         _fontText.draw(batch, _lang.getString("Time left"), 78, 180);
 
-        layout.setText(_fontTime, _txtTime);
+        _layout.setText(_fontTime, _txtTime);
         _fontTime.draw(batch,
                 _txtTime,
-                390 - layout.width,
+                390 - _layout.width,
                 237);
 
         // Draw board

@@ -60,6 +60,8 @@ public class StateMenu extends State {
 
     private boolean _readyToChange;
 
+    GlyphLayout _layout;
+
     public StateMenu(Freegemas freegemas) {
         super(freegemas);
 
@@ -97,6 +99,8 @@ public class StateMenu extends State {
         _animLogoTime = 0.5;
 
         _readyToChange = false;
+
+        _layout = new GlyphLayout();
     }
 
     @Override
@@ -168,12 +172,11 @@ public class StateMenu extends State {
         float maxWidth = 0;
         int numOptions = _options.size;
 
-        GlyphLayout layout = new GlyphLayout();
         for (int i = 0; i < numOptions; ++i) {
-            layout.setText(_fontMenu, _options.get(i).getFirst());
+            _layout.setText(_fontMenu, _options.get(i).getFirst());
 
-            if (layout.width > maxWidth) {
-                maxWidth = layout.width;
+            if (_layout.width > maxWidth) {
+                maxWidth = _layout.width;
             }
         }
 
@@ -217,12 +220,11 @@ public class StateMenu extends State {
         // STATE LOADING - Just render loading
         if (_state == State.Loading) {
             String loading = _lang.getString("Loading...");
-            GlyphLayout layout = new GlyphLayout();
-            layout.setText(_fontLoading, loading);
+            _layout.setText(_fontLoading, loading);
             _fontLoading.draw(batch,
                     loading,
-                    (Freegemas.VIRTUAL_WIDTH - layout.width) / 2,
-                    (Freegemas.VIRTUAL_HEIGHT - layout.height) / 2);
+                    (Freegemas.VIRTUAL_WIDTH - _layout.width) / 2,
+                    (Freegemas.VIRTUAL_HEIGHT - _layout.height) / 2);
 
             return;
         }
@@ -235,15 +237,13 @@ public class StateMenu extends State {
 
         int numOptions = _options.size;
 
-        GlyphLayout layout = new GlyphLayout();
-
         for (int i = 0; i < numOptions; ++i) {
-            layout.setText(_fontMenu, _options.get(i).getFirst());
+            _layout.setText(_fontMenu, _options.get(i).getFirst());
 
             _fontMenu.setColor(0.0f, 0.0f, 0.0f, 0.5f);
-            _fontMenu.draw(batch, _options.get(i).getFirst(), (Freegemas.VIRTUAL_WIDTH - layout.width) / 2, _menuStart.y + i * _menuGap + 4);
+            _fontMenu.draw(batch, _options.get(i).getFirst(), (Freegemas.VIRTUAL_WIDTH - _layout.width) / 2, _menuStart.y + i * _menuGap + 4);
             _fontMenu.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-            _fontMenu.draw(batch, _options.get(i).getFirst(), (Freegemas.VIRTUAL_WIDTH - layout.width) / 2, _menuStart.y + i * _menuGap);
+            _fontMenu.draw(batch, _options.get(i).getFirst(), (Freegemas.VIRTUAL_WIDTH - _layout.width) / 2, _menuStart.y + i * _menuGap);
         }
 
         _gems.draw(Gdx.graphics.getDeltaTime());
