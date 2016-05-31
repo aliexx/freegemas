@@ -123,7 +123,7 @@ public class Button {
         if (mX > _pos.x &&
                 mX < _pos.x + _width &&
                 mY > _pos.y &&
-                mY < _pos.y + _height)
+                mY < _pos.y - _height)
         {
             _clicked = true;
             return true;
